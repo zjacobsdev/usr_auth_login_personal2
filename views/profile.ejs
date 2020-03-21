@@ -8,9 +8,8 @@
 </head>
 <body>
 <div class="container">
-
     <div class="page-header text-center">
-        <h1><span class="fa fa-anchor"></span> Profile Page</h1>
+        <h1><%= user.local.email%>'s' 8Ball Diary</h1>
         <a href="/logout" class="btn btn-default btn-sm">Logout</a>
     </div>
 
@@ -18,45 +17,28 @@
 
         <!-- LOCAL INFORMATION -->
         <div class="col-sm-6">
-            <div class="well">
-                <h3><span class="fa fa-user"></span> Local</h3>
-
-                <% if (user.local.email) { %>
-                    <p>
-                        <strong>id</strong>: <%= user._id %><br>
-                        <strong>email</strong>: <%= user.local.email %><br>
-                        <strong>password</strong>: <%= user.local.password %>
-                    </p>
-
-                    <a href="/unlink/local" class="btn btn-default">Unlink</a>
-                <% } else { %>
-                    <a href="/connect/local" class="btn btn-default">Connect Local</a>
-                <% } %>
-
-            </div>
-        </div>
-        <div class="col-sm-6">
-          <h3>Messages</h3>
+          <h3>8Ball Dairy </h3>
           <ul class="messages">
-          <% for(var i=0; i<messages.length; i++) {%>
-           <% if(messages[i].name === user.local.email ) {%>
+          <% for(var i=0; i < diary.length; i++) {%>
+           <% if(diary[i].name === user.local.email ) {%>
+            <% pick = Math.floor(Math.random()*6)%>
             <li class="message">
-              <span><%= messages[i].name %></span>
-              <span><%= messages[i].msg %></span>
-              <span><%= messages[i].thumbUp %></span>
-              <span><i class="fa fa-thumbs-up" aria-hidden="true"></i></span>
-              <span><i class="fa fa-thumbs-down" aria-hidden="true"></i></span>
+              <!-- <span><%= diary[i].name %></span> -->
+              <span><%= diary[i].q %></span>
+              <span class = "answer"><%- diary[i].a[pick] %></span>
+              <!-- <span><i class="fa fa-thumbs-up" aria-hidden="true"></i></span>
+              <span><i class="fa fa-thumbs-down" aria-hidden="true"></i></span> -->
               <span><i class="fa fa-trash" aria-hidden="true"></i></span>
             </li>
             <% } %>
           <% } %>
           </ul>
 
-          <h2>Add a message</h2>
+          <h2>Ask your Question</h2>
         <% if (user.local.email) { %>
-          <form action="/messages" method="POST">
-            <input type="text" value="<%= user.local.email %>" name="name">
-            <input type="text" placeholder="message" name="msg">
+          <form action="/diary" method="POST">
+            <input type="text" value="<%= user.local.email %>" name="name" style="display:none;">
+            <input type="text" placeholder="Question?" name="msg">
             <button type="submit">Submit</button>
           </form>
         </div>

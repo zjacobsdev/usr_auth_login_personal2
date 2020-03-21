@@ -11,13 +11,14 @@ module.exports = function(app, passport, db) {
     app.get('/profile', isLoggedIn, function(req, res) {
       if(req.user.local.email){
         //console.log(req.user.local)
-        db.collection('messages').find().toArray((err, result) => {
+        db.collection('diary').find().toArray((err, result) => {
           //console.log(result)
           console.log(req)
           if (err) return console.log(err)
           res.render('profile.ejs', {
             user: req.user,
-            messages: result
+            diary: result,
+            pick : null
           })
         })
       }
@@ -41,16 +42,16 @@ module.exports = function(app, passport, db) {
 
 // message board routes ===============================================================
 
-    app.post('/messages', (req, res) => {
-      db.collection('messages').save({name: req.body.name, msg: req.body.msg, thumbUp: 0, thumbDown:0}, (err, result) => {
+    app.post('/diary', (req, res) => {
+      db.collection('diary').save({name: req.body.name, q: req.body.msg, a:["Maybe", "NO NO NO", "sure", "....","Yaaaas","In your dreams"] }, (err, result) => {
         if (err) return console.log(err)
         console.log('saved to database')
         res.redirect('/profile')
       })
     })
 
-    app.put('/messages', (req, res) => {
-      db.collection('messages')
+    app.put('/diary', (req, res) => {
+      db.collection('diary')
       .findOneAndUpdate({name: req.body.name, msg: req.body.msg}, {
         $set: {
           thumbUp:req.body.thumbUp + 1
@@ -64,8 +65,8 @@ module.exports = function(app, passport, db) {
       })
     })
 
-    app.delete('/messages', (req, res) => {
-      db.collection('messages').findOneAndDelete({name: req.body.name, msg: req.body.msg}, (err, result) => {
+    app.delete('/diary', (req, res) => {
+      db.collection('diary').findOneAndDelete({name: req.body.name, q: req.body.q}, (err, result) => {
         if (err) return res.send(500, err)
         res.send('Message deleted!')
       })
