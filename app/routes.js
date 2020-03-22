@@ -43,33 +43,41 @@ module.exports = function(app, passport, db) {
 // message board routes ===============================================================
 
     app.post('/diary', (req, res) => {
-      db.collection('diary').save({name: req.body.name, q: req.body.msg, a:["Maybe", "NO NO NO", "sure", "....","Yaaaas","In your dreams"] }, (err, result) => {
+      let saying =["Maybe", "NO NO NO", "sure", "....","Yaaaas","In your dreams"]
+      let pickSaying = Math.floor(Math.random()*6)
+
+      db.collection('diary').save({name: req.body.name, q: req.body.msg, a:saying[pickSaying]}, (err, result) => {
         if (err) return console.log(err)
         console.log('saved to database')
         res.redirect('/profile')
       })
     })
 
-    app.put('/diary', (req, res) => {
-      db.collection('diary')
-      .findOneAndUpdate({name: req.body.name, msg: req.body.msg}, {
-        $set: {
-          thumbUp:req.body.thumbUp + 1
-        }
-      }, {
-        sort: {_id: -1},
-        upsert: true
-      }, (err, result) => {
-        if (err) return res.send(err)
-        res.send(result)
-      })
-    })
+    // app.put('/diary', (req, res) => {
+    //   db.collection('diary')
+    //   .findOneAndUpdate({name: req.body.name, msg: req.body.msg}, {
+    //     $set: {
+    //       thumbUp:req.body.thumbUp + 1
+    //     }
+    //   }, {
+    //     sort: {_id: -1},
+    //     upsert: true
+    //   }, (err, result) => {
+    //     if (err) return res.send(err)
+    //     res.send(result)
+    //   })
+    // })
 
     app.delete('/diary', (req, res) => {
-      db.collection('diary').findOneAndDelete({name: req.body.name, q: req.body.q}, (err, result) => {
+      console.log(req.body.name)
+      console.log(req.body.q)
+      db.collection('diary').findOneAndDelete({name:req.body.name, q:req.body.q, a:req.body.a}, (err, result) => {
         if (err) return res.send(500, err)
         res.send('Message deleted!')
+        console.log(req.body.name)
+        console.log(req.body.q)
       })
+
     })
 
 // =============================================================================

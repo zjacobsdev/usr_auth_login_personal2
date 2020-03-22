@@ -1,3 +1,10 @@
+*{
+  box-sizing: border-box;
+  border: 1px solid blue;
+}
+html{
+    font-size: 10px;
+}
 body{
   padding-top:80px;
   word-wrap:break-word;
@@ -8,11 +15,24 @@ h1{
 img{
   height: 200px;
 }
-.answer{
-  color:red
-}
+
 li{
   list-style: decimal-leading-zero;
   margin-bottom: 10px;
 }
+span{
+  font-size: 1.5rem;
+}
 
+.trash{
+  font-size: large;
+  font-weight: 700;
+  background: linear-gradient(to right, orange , yellow, green, cyan, blue, violet);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-left: 5%;
+  
+}
+.answer{
+  color:red
+}

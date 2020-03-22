@@ -1,5 +1,7 @@
+
 // var thumbUp = document.getElementsByClassName("fa-thumbs-up");
-var trash = document.getElementsByClassName("fa-trash");
+var trash = document.getElementsByClassName("trash");
+const name =document.querySelector('[name="name"]')
 
 // Array.from(thumbUp).forEach(function(element) {
 //       element.addEventListener('click', function(){
@@ -27,8 +29,8 @@ var trash = document.getElementsByClassName("fa-trash");
 
 Array.from(trash).forEach(function(element) {
       element.addEventListener('click', function(){
-        const name = this.parentNode.parentNode.childNodes[1].innerText
-        const q = this.parentNode.parentNode.childNodes[3].innerText
+        const q = this.parentNode.childNodes[1].innerText
+        const a = this.parentNode.childNodes[2].innerText
         fetch('diary', {
           method: 'delete',
           headers: {
@@ -36,7 +38,8 @@ Array.from(trash).forEach(function(element) {
           },
           body: JSON.stringify({
              'name': name,
-             'q': q
+             'q': q,
+             'a': a
           })
         }).then(function (response) {
           window.location.reload()

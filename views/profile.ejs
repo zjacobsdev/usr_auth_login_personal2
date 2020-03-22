@@ -2,8 +2,10 @@
 <html>
 <head>
     <title>21 Savage Fan Site</title>
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -21,14 +23,10 @@
           <ul class="messages">
           <% for(var i=0; i < diary.length; i++) {%>
            <% if(diary[i].name === user.local.email ) {%>
-            <% pick = Math.floor(Math.random()*6)%>
             <li class="message">
-              <!-- <span><%= diary[i].name %></span> -->
               <span><%= diary[i].q %></span>
-              <span class = "answer"><%- diary[i].a[pick] %></span>
-              <!-- <span><i class="fa fa-thumbs-up" aria-hidden="true"></i></span>
-              <span><i class="fa fa-thumbs-down" aria-hidden="true"></i></span> -->
-              <span><i class="fa fa-trash" aria-hidden="true"></i></span>
+              <span class = "answer"><%- diary[i].a%></span>
+              <button class ="trash">Trash This!</button>
             </li>
             <% } %>
           <% } %>
