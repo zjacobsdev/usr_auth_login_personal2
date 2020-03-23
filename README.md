@@ -1,13 +1,20 @@
-## Installation
+# 8Ball Dairy
+Learning how an simple CRUD APP works and making a 8ball genie where you can ask your private questions
 
-1. Clone repo
-2. run `npm install`
+**Link to project:** TBA
 
-## Usage
+## How It's Made:
 
-1. run `node server.js`
-2. Navigate to `localhost:8080`
+**Tech used:** HTML, CSS, JavaScript, Node.js, Express.js, MongoDB
 
-## Credit
+Ask a question, it gets saved in the database alone with an randomly generated answer
 
-Modified from Scotch.io's auth tutorial
+
+## Examples:
+TBA
+
+## How To Run it:
+
+1. Navigate to `localhost:8280`
+
+
